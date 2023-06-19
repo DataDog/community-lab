@@ -56,14 +56,6 @@ func CreateDataFile() IntegrationList {
 			}
 		}
 	}
-	yamlData, err := yaml.Marshal(list)
-	if err != nil {
-		fmt.Printf("Error while Marshaling. %v", err)
-	}
-	err = os.WriteFile("./_web/_data/IntegrationList.yaml", yamlData, 0644)
-	if err != nil {
-		fmt.Printf("Error while Writing. %v", err)
-	}
 	return list
 }
 

@@ -2,10 +2,13 @@
 
     <ul>
         <li>
-            <a href="/">home</a>
+            <a href="{{ site.url }}">home</a>
         </li>
-        {% for item in site.data.IntegrationList.integrations %}
-        <li><a href="integrations/{{ item }}"> {{ item }}</a></li>
+
+        {% for doc in site.pages %}
+            {% if doc.category == "integration" %}
+                <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+            {% endif %}
         {% endfor %}
     </ul>
 </nav>

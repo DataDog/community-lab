@@ -1,5 +1,7 @@
 package src
 
+import "fmt"
+
 var IntegrationPageTemplate = `<h2>{{ int.name }}</h2>
 
 
@@ -14,7 +16,7 @@ var IntegrationPageTemplate = `<h2>{{ int.name }}</h2>
 `
 
 func NewIntegrationTemplate(integration string) string {
-	template := "---\n\n---\n\n"
+	template := fmt.Sprintf("---\ncategory: integration\ntitle: %s\n---\n\n", integration)
 	template += "{% assign int = site.data.integration_" + integration + " %}\n\n"
 	template += IntegrationPageTemplate
 
