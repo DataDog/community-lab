@@ -1,0 +1,1 @@
+{"description":"Visualize AWS Auto Scaling metrics","is_read_only":false,"layout_type":"ordered","template_variables":[{"name":"region","prefix":"region"},{"name":"autoscalinggroupname","prefix":"autoscalinggroupname"}],"title":"AWS Auto Scaling","widgets":null}

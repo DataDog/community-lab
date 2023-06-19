@@ -1,0 +1,202 @@
+{
+    "description": "Visualize AWS API Gateway metrics",
+    "is_read_only": false,
+    "layout_type": "ordered",
+    "template_variables": [
+        {
+            "name": "region",
+            "prefix": "region"
+        },
+        {
+            "name": "apiname",
+            "prefix": "apiname"
+        },
+        {
+            "name": "stage",
+            "prefix": "stage"
+        }
+    ],
+    "title": "AWS API Gateway",
+    "widgets": [
+        {
+            "definition": {
+                "requests": [
+                    {
+                        "formulas": [
+                            {
+                                "formula": "A"
+                            }
+                        ],
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "A",
+                                "query": "sum:aws.apigateway.count{$apiname,$stage}.as_count()"
+                            }
+                        ],
+                        "response_format": "timeseries"
+                    }
+                ],
+                "title": "Count",
+                "title_size": "16",
+                "type": "timeseries"
+            },
+            "layout": {
+                "height": 4,
+                "width": 12,
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "definition": {
+                "requests": [
+                    {
+                        "formulas": [
+                            {
+                                "formula": "A"
+                            },
+                            {
+                                "formula": "B"
+                            },
+                            {
+                                "formula": "C"
+                            }
+                        ],
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "A",
+                                "query": "avg:aws.apigateway.latency{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "B",
+                                "query": "avg:aws.apigateway.integration_latency{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "C",
+                                "query": "max:aws.apigateway.latency{$stage,$apiname}.as_count()"
+                            }
+                        ],
+                        "response_format": "timeseries"
+                    }
+                ],
+                "title": "Latency / IntegrationLatency",
+                "title_size": "16",
+                "type": "timeseries"
+            },
+            "layout": {
+                "height": 4,
+                "width": 12,
+                "x": 0,
+                "y": 4
+            }
+        },
+        {
+            "definition": {
+                "requests": [
+                    {
+                        "formulas": [
+                            {
+                                "formula": "e400"
+                            },
+                            {
+                                "formula": "e500"
+                            },
+                            {
+                                "formula": "(e400+e500)*100/countt"
+                            }
+                        ],
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "e400",
+                                "query": "sum:aws.apigateway.4xxerror{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "e500",
+                                "query": "sum:aws.apigateway.5xxerror{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "countt",
+                                "query": "sum:aws.apigateway.count{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "rate",
+                                "query": "sum:aws.apigateway.count{$stage,$apiname}.as_count()"
+                            }
+                        ],
+                        "response_format": "timeseries"
+                    }
+                ],
+                "title": "4XXError / 5XXError",
+                "title_size": "16",
+                "type": "timeseries"
+            },
+            "layout": {
+                "height": 4,
+                "width": 12,
+                "x": 0,
+                "y": 7
+            }
+        },
+        {
+            "definition": {
+                "requests": [
+                    {
+                        "formulas": [
+                            {
+                                "formula": "A"
+                            },
+                            {
+                                "formula": "B"
+                            }
+                        ],
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "A",
+                                "query": "sum:aws.apigateway.cache_hit_count{$apiname,$stage}.as_count()"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "B",
+                                "query": "sum:aws.apigateway.cache_miss_count{$apiname,$stage}.as_count()"
+                            }
+                        ],
+                        "response_format": "timeseries"
+                    }
+                ],
+                "title": "CacheHitCount / CacheMissCount",
+                "title_size": "16",
+                "type": "timeseries"
+            },
+            "layout": {
+                "height": 4,
+                "width": 12,
+                "x": 0,
+                "y": 11
+            }
+        },
+        {
+            "definition": {
+                "background_color": "white",
+                "content": "[![](https://monitoringartist.github.io/monitoring-artist-logo-grafana.png)](http://www.monitoringartist.com \"Dashboard maintained by Monitoring Artist - DevOps / Docker / Kubernetes / AWS ECS / Google GCP / Zabbix / Zenoss / Terraform / Monitoring\") \\|\n[AWS CloudWatch API Gateway documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-metrics-and-dimensions.html) \\|\n[Installed from Grafana.com dashboards](https://grafana.com/dashboards/1516)",
+                "has_padding": true,
+                "show_tick": false,
+                "type": "note"
+            },
+            "layout": {
+                "height": 2,
+                "width": 12,
+                "x": 0,
+                "y": 14
+            }
+        }
+    ]
+}

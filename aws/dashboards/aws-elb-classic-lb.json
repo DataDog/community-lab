@@ -1,0 +1,1 @@
+{"description":"Visualize AWS ELB Classic Load Balancer metrics","is_read_only":false,"layout_type":"ordered","template_variables":[{"name":"region","prefix":"region"},{"name":"loadbalancername","prefix":"loadbalancername"}],"title":"AWS ELB Classic Load Balancer","widgets":null}

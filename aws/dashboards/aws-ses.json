@@ -1,0 +1,1 @@
+{"description":"Visualize AWS SES metrics","is_read_only":false,"layout_type":"ordered","template_variables":[{"name":"region","prefix":"region"}],"title":"AWS SES","widgets":null}
