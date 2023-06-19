@@ -23,8 +23,6 @@ email: antonin.bruneau@datadoghq.com
 description: >- # this means to ignore newlines until "baseurl:"
   A place to share your best Datadog  dashboards, monitors, and more
   with the comunity
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: bruneauantonin
 github_username:  abruneau
 
@@ -32,6 +30,11 @@ github_username:  abruneau
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme
+
+repository: DataDog/community-lab
+domain: community-lab.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://community-lab.github.io  # the base hostname and protocol for your site, e.g. http://example.com
+# baseurl: /_web/      # place folder name if the site is served in a subfolder
 
 # Exclude from processing.
 # The following items will not be processed, by default.
