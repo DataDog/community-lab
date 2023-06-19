@@ -8,7 +8,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var reserved_directories = []string{"src", "_web", ".git"}
+var reserved_directories = []string{"src", "_web", ".git", ".github"}
 
 type Integration struct {
 	Name       string
@@ -19,7 +19,15 @@ type IntegrationList struct {
 	Integrations []string
 }
 
+func cleanup() {
+	os.RemoveAll("./_web/integrations/")
+	os.RemoveAll("./_web/_data/")
+	os.MkdirAll("./_web/integrations/", 0744)
+	os.MkdirAll("./_web/_data/", 0744)
+}
+
 func CreateDataFile() IntegrationList {
+	cleanup()
 	var list IntegrationList
 
 	items, _ := os.ReadDir(".")
