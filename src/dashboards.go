@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1"
 )
@@ -12,6 +13,8 @@ import (
 type Dash struct {
 	Title       string
 	Description string
+	Image       string
+	Path        string
 }
 
 func ListIntegrationDashboard(i string) ([]Dash, error) {
@@ -25,12 +28,13 @@ func ListIntegrationDashboard(i string) ([]Dash, error) {
 
 	for _, file := range files {
 		if !file.IsDir() && filepath.Ext(file.Name()) == ".json" {
-			filePath := filepath.Join(iPath, file.Name())
-			dash, err := processJSONFile(filePath)
+			dash := Dash{Path: filepath.Join(iPath, file.Name())}
+			err := dash.processJSONFile()
 			if err != nil {
-				fmt.Printf("Error processing file %s: %v", filePath, err)
+				fmt.Printf("Error processing file %s: %v", dash.Path, err)
 				continue
 			}
+			dash.findImage()
 			dashboards = append(dashboards, dash)
 		}
 	}
@@ -38,13 +42,12 @@ func ListIntegrationDashboard(i string) ([]Dash, error) {
 	return dashboards, nil
 }
 
-func processJSONFile(filePath string) (Dash, error) {
-	var d Dash
+func (d *Dash) processJSONFile() error {
 	var err error
 
-	file, err := os.Open(filePath)
+	file, err := os.Open(d.Path)
 	if err != nil {
-		return d, err
+		return err
 	}
 	defer file.Close()
 
@@ -52,11 +55,25 @@ func processJSONFile(filePath string) (Dash, error) {
 
 	err = json.NewDecoder(file).Decode(&data)
 	if err != nil {
-		return d, err
+		return err
 	}
 
 	d.Title = data.Title
 	d.Description = data.GetDescription()
 
-	return d, nil
+	return nil
+}
+
+func (d *Dash) findImage() {
+	imgPath := TrimSuffix(d.Path, "json") + "png"
+	if _, err := os.Stat(imgPath); err == nil {
+		d.Image = imgPath
+	}
+}
+
+func TrimSuffix(s, suffix string) string {
+	if strings.HasSuffix(s, suffix) {
+		s = s[:len(s)-len(suffix)]
+	}
+	return s
 }
