@@ -32,8 +32,8 @@ plugins:
 - jekyll-remote-theme
 
 repository: DataDog/community-lab
-domain: community-lab.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
-url: https://community-lab.github.io  # the base hostname and protocol for your site, e.g. http://example.com
+domain: datadoghq.dev       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://datadoghq.dev/community-lab/  # the base hostname and protocol for your site, e.g. http://example.com
 # baseurl: /_web/      # place folder name if the site is served in a subfolder
 
 # Exclude from processing.

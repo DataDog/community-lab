@@ -1,0 +1,11 @@
+<nav class="nav">
+
+    <ul>
+        <li>
+            <a href="/">home</a>
+        </li>
+        {% for item in site.data.IntegrationList.integrations %}
+        <li><a href="integrations/{{ item }}"> {{ item }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
