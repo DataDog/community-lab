@@ -2,12 +2,12 @@
 
     <ul>
         <li>
-            <a href="{{ site.url }}">home</a>
+            <a href="{{ site.baseurl }}/">home</a>
         </li>
 
         {% for doc in site.pages %}
             {% if doc.category == "integration" %}
-                <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+                <li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>
