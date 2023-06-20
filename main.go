@@ -1,7 +1,7 @@
 package main
 
 import (
-	"datadog_comunity/src"
+	"datadog_community/src"
 )
 
 func main() {
