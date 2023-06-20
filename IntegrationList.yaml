@@ -1,4 +1,0 @@
-integrations:
-    - name: aws
-    - name: azure
-    - name: gcp
