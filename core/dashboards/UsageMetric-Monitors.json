@@ -1,0 +1,551 @@
+{
+    "title": "Usage Metric - Monitors",
+    "description": "",
+    "widgets": [
+        {
+            "id": 5074550583578078,
+            "definition": {
+                "title": "Custom Metrics",
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 2599244956187974,
+                        "definition": {
+                            "title": "Custom Metrics vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.metrics.custom{*}",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.metrics.custom{*})",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 6009766786082872,
+                        "definition": {
+                            "title": "Custom Metrics vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.metrics.custom{*}-week_before(sum:datadog.estimated_usage.metrics.custom{*}))/week_before(sum:datadog.estimated_usage.metrics.custom{*})*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 1631380490719146,
+            "definition": {
+                "title": "APM - Ingestion / Indexation",
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 8150795997864922,
+                        "definition": {
+                            "title": "Ingested Bytes / env vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_bytes{*} by {env}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.apm.ingested_bytes{*} by {env}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 772505075344244,
+                        "definition": {
+                            "title": "Ingested Bytes vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.apm.ingested_bytes{*}.as_count()-week_before(sum:datadog.estimated_usage.apm.ingested_bytes{*}.as_count()))/week_before(sum:datadog.estimated_usage.apm.ingested_bytes{*}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 6596939885618668,
+                        "definition": {
+                            "title": "Indexed Spans / env vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{*} by {env}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {env}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 8396443826734308,
+                        "definition": {
+                            "title": "Indexed Spans vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.apm.indexed_spans{*}.as_count()-week_before(sum:datadog.estimated_usage.apm.indexed_spans{*}.as_count()))/week_before(sum:datadog.estimated_usage.apm.indexed_spans{*}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 1044676592837506,
+                        "definition": {
+                            "title": "Indexed Spans / filter_id vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{*} by {filter_id}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {filter_id}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 3944059405594008,
+                        "definition": {
+                            "title": "Indexed Spans / filter_id vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.apm.indexed_spans{*} by {filter_id}.as_count()-week_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {filter_id}.as_count()))/week_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {filter_id}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 2938069601420154,
+                        "definition": {
+                            "title": "Indexed Spans / service vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{*} by {service}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {service}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 3090695508284072,
+                        "definition": {
+                            "title": "Indexed Spans / service vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.apm.indexed_spans{*} by {service}.as_count()-week_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {service}.as_count()))/week_before(sum:datadog.estimated_usage.apm.indexed_spans{*} by {service}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 249033219115784,
+            "definition": {
+                "title": "Logs",
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 7846024675045548,
+                        "definition": {
+                            "title": "Ingested Logs vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.logs.ingested_bytes{*}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.logs.ingested_bytes{*}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 8344775326501580,
+                        "definition": {
+                            "title": "Ingested Logs vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.logs.ingested_bytes{*}.as_count()-week_before(sum:datadog.estimated_usage.logs.ingested_bytes{*}.as_count()))/week_before(sum:datadog.estimated_usage.logs.ingested_bytes{*}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": 8269115254653752,
+                        "definition": {
+                            "title": "Indexed Logs vs Previous Month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false}.as_count()",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                },
+                                {
+                                    "q": "month_before(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false}.as_count())",
+                                    "on_right_yaxis": false,
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "dashed",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        }
+                    },
+                    {
+                        "id": 3465718156758122,
+                        "definition": {
+                            "title": "Indexed Logs vs Previous Week in %",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false}.as_count()-week_before(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false}.as_count()))/week_before(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false}.as_count())*100",
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": [
+                                {
+                                    "value": "y > 10",
+                                    "display_type": "warning dashed"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "template_variables": [],
+    "layout_type": "ordered",
+    "is_read_only": false,
+    "notify_list": []
+}
