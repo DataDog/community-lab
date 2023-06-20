@@ -13,6 +13,7 @@ var reserved_directories = []string{"src", "_web", ".git", ".github"}
 type Integration struct {
 	Name       string
 	Dashboards []Dash
+	Monitors   []Monitor
 }
 
 type IntegrationList struct {
@@ -42,6 +43,12 @@ func CreateDataFile() IntegrationList {
 				fmt.Println(err)
 			} else {
 				integra.Dashboards = dashs
+			}
+			monitors, err := ListMonitors(item.Name())
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				integra.Monitors = monitors
 			}
 
 			yamlData, err := yaml.Marshal(&integra)
