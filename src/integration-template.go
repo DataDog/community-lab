@@ -2,17 +2,30 @@ package src
 
 import "fmt"
 
-var IntegrationPageTemplate = `<h2>{{ int.name }}</h2>
+var IntegrationPageTemplate = `
+<div class="integration-title">
+	<h1>{{ int.name }}</h1>
+	<div class="line"></div>
+</div>
 
 
-<ul>
+<div class="dash-list">
    {% for item in int.dashboards %}
-      <li>
-	  	{{ item.title }}
-		<p>{{item.description}}</p>
-	  </li>
+      <div class="dash">
+	  <figure>
+	  	{% if item.image != "" %}
+	  		<img src="https://github.com/{{site.repository}}/blob/main/{{item.image}}?raw=true" alt="{{ item.title }}" >
+		{% else %}
+			<img src="{{ site.baseurl }}/assets/dashboard.png" alt="{{ item.title }}" >
+		{% endif %}
+			<figcaption><a href="https://github.com/{{site.repository}}/blob/main/{{item.path}}">{{ item.title }}</a></figcaption>
+		</figure>
+		<div class="middle">
+    		<div class="text">{{item.description}}</div>
+  		</div>
+	  </div>
    {% endfor %}
-</ul>
+</div>
 `
 
 func NewIntegrationTemplate(integration string) string {
