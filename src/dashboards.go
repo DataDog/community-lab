@@ -65,15 +65,8 @@ func (d *Dash) processJSONFile() error {
 }
 
 func (d *Dash) findImage() {
-	imgPath := TrimSuffix(d.Path, "json") + "png"
+	imgPath := strings.TrimSuffix(d.Path, "json") + "png"
 	if _, err := os.Stat(imgPath); err == nil {
 		d.Image = imgPath
 	}
-}
-
-func TrimSuffix(s, suffix string) string {
-	if strings.HasSuffix(s, suffix) {
-		s = s[:len(s)-len(suffix)]
-	}
-	return s
 }
