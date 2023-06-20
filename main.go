@@ -6,6 +6,5 @@ import (
 
 func main() {
 
-	var integrations = src.CreateDataFile()
-	integrations.CreateIntegrationPage()
+	src.Build()
 }

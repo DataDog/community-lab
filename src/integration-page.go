@@ -3,6 +3,7 @@ package src
 import (
 	"fmt"
 	"os"
+	"text/template"
 
 	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
@@ -17,7 +18,7 @@ type Integration struct {
 }
 
 type IntegrationList struct {
-	Integrations []string
+	Integrations []Integration
 }
 
 func cleanup() {
@@ -27,15 +28,18 @@ func cleanup() {
 	os.MkdirAll("./_web/_data/", 0744)
 }
 
-func CreateDataFile() IntegrationList {
+func Build() {
 	cleanup()
+	list := createDataFile()
+	list.createIntegrationPages()
+}
+
+func createDataFile() IntegrationList {
 	var list IntegrationList
 
 	items, _ := os.ReadDir(".")
 	for _, item := range items {
 		if item.IsDir() && !slices.Contains(reserved_directories, item.Name()) {
-			list.Integrations = append(list.Integrations, item.Name())
-
 			integra := Integration{Name: item.Name()}
 
 			dashs, err := ListIntegrationDashboard(item.Name())
@@ -61,16 +65,33 @@ func CreateDataFile() IntegrationList {
 			if err != nil {
 				fmt.Printf("Error while Writing. %v", err)
 			}
+			list.Integrations = append(list.Integrations, integra)
+
 		}
 	}
 	return list
 }
 
-func (il *IntegrationList) CreateIntegrationPage() {
-	for _, integ := range il.Integrations {
-		err := os.WriteFile(fmt.Sprintf("./_web/integrations/%s.md", integ), []byte(NewIntegrationTemplate(integ)), 0644)
+func (il *IntegrationList) createIntegrationPages() {
+	t, err := template.ParseFiles("src/integration-template.md")
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	for _, i := range il.Integrations {
+
+		f, err := os.Create(fmt.Sprintf("./_web/integrations/%s.md", i.Name))
 		if err != nil {
-			fmt.Printf("Error while Writing. %v", err)
+			fmt.Println("create file: ", err)
+			return
+		}
+		defer f.Close()
+
+		err = t.Execute(f, i)
+		if err != nil {
+			fmt.Print("execute: ", err)
+			return
 		}
 	}
 }
