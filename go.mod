@@ -1,4 +1,4 @@
-module datadog_comunity
+module datadog_community
 
 go 1.20
 

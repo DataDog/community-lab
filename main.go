@@ -1,11 +1,10 @@
 package main
 
 import (
-	"datadog_comunity/src"
+	"datadog_community/src"
 )
 
 func main() {
 
-	var integrations = src.CreateDataFile()
-	integrations.CreateIntegrationPage()
+	src.Build()
 }

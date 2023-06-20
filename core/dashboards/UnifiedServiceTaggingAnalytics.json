@@ -1,0 +1,713 @@
+{
+    "title": "Unified Service Tagging Analytics",
+    "description": "",
+    "widgets": [
+        {
+            "id": 8455713488388882,
+            "layout": {
+                "x": 76,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Container UST Analytics",
+                "background_color": "vivid_blue",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 1964225542647905,
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# APM UST Analytics",
+                "background_color": "vivid_yellow",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 2206998974625848,
+            "layout": {
+                "x": 38,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Logging UST Analytics",
+                "background_color": "vivid_pink",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 2061878759818931,
+            "layout": {
+                "x": 114,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Host UST Analytics",
+                "background_color": "vivid_green",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 2885826160491165,
+            "layout": {
+                "x": 114,
+                "y": 18,
+                "width": 37,
+                "height": 33
+            },
+            "definition": {
+                "title": "By Version, env (service does not exist)",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "hostmap",
+                "requests": {
+                    "fill": {
+                        "q": "avg:system.cpu.user{*} by {host}"
+                    }
+                },
+                "node_type": "host",
+                "no_metric_hosts": true,
+                "no_group_hosts": true,
+                "group": [
+                    "version",
+                    "env",
+                    "v1_service"
+                ],
+                "style": {
+                    "palette": "YlOrRd",
+                    "palette_flip": false
+                }
+            }
+        },
+        {
+            "id": 3088320849697029,
+            "layout": {
+                "x": 114,
+                "y": 6,
+                "width": 37,
+                "height": 11
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Current State :: March21\n- nearly NO Host has the tags: env, version and service\n- Makes sense for services\n",
+                "background_color": "vivid_orange",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 4222009102945190,
+            "layout": {
+                "x": 114,
+                "y": 52,
+                "width": 37,
+                "height": 12
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Alternative  Host UST Analytics\n- v1_service -> Service\n- v1_zone_location -> Env\n-v1_role -> version (kinda close, not correctly though)\n",
+                "background_color": "vivid_green",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 669983292394238,
+            "layout": {
+                "x": 114,
+                "y": 65,
+                "width": 37,
+                "height": 21
+            },
+            "definition": {
+                "title": "by v1_service, v1_zone_location, v1_role",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "hostmap",
+                "requests": {
+                    "fill": {
+                        "q": "avg:system.cpu.user{*} by {host}"
+                    }
+                },
+                "node_type": "host",
+                "no_metric_hosts": true,
+                "no_group_hosts": true,
+                "group": [
+                    "v1_service",
+                    "v1_zone_location",
+                    "v1_role"
+                ],
+                "style": {
+                    "palette": "green_to_orange",
+                    "palette_flip": false
+                }
+            }
+        },
+        {
+            "id": 8733173846101711,
+            "layout": {
+                "x": 76,
+                "y": 6,
+                "width": 37,
+                "height": 13
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Current State :: March21\n- A lot have env, service, version\n- A lot DONT HAVE env, service, version\n- No table view possible to determine NO services, NO version and NO env",
+                "background_color": "vivid_yellow",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 5909354294433951,
+            "layout": {
+                "x": 76,
+                "y": 20,
+                "width": 37,
+                "height": 33
+            },
+            "definition": {
+                "title": "By Version, env ,service",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "hostmap",
+                "requests": {
+                    "fill": {
+                        "q": "avg:process.stat.container.io.wbps{*} by {host}"
+                    }
+                },
+                "node_type": "container",
+                "no_metric_hosts": true,
+                "no_group_hosts": true,
+                "group": [
+                    "env",
+                    "service",
+                    "version"
+                ],
+                "style": {
+                    "palette": "hostmap_blues",
+                    "palette_flip": false
+                }
+            }
+        },
+        {
+            "id": 5228631415383610,
+            "layout": {
+                "x": 0,
+                "y": 18,
+                "width": 37,
+                "height": 33
+            },
+            "definition": {
+                "title": "Traces by Env, Service Version",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "apm_query": {
+                            "index": "trace-search",
+                            "search": {
+                                "query": ""
+                            },
+                            "group_by": [
+                                {
+                                    "facet": "env",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "service",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "@version",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                }
+                            ],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2794304013275999,
+            "layout": {
+                "x": 38,
+                "y": 6,
+                "width": 37,
+                "height": 11
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Host UST Analytics\n- nearly NO Host has the tags: env, version and service\n- Makes sense for services\n",
+                "background_color": "vivid_orange",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 1046460109161355,
+            "layout": {
+                "x": 0,
+                "y": 6,
+                "width": 37,
+                "height": 11
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Current State :: March21\n- Traces mostly do have env, service, version selectable\n",
+                "background_color": "vivid_orange",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 7656014762414326,
+            "layout": {
+                "x": 0,
+                "y": 52,
+                "width": 37,
+                "height": 12
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Dysfunctional Traces\n- There seems to be no trace without env and service\n- no version seems to be broken\n",
+                "background_color": "vivid_orange",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 6276539009622604,
+            "layout": {
+                "x": 0,
+                "y": 64,
+                "width": 37,
+                "height": 22
+            },
+            "definition": {
+                "title": "Traces with NO Version - BROKEN",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "apm_query": {
+                            "index": "trace-search",
+                            "search": {
+                                "query": "-version:*"
+                            },
+                            "group_by": [
+                                {
+                                    "facet": "env",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "service",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "@version",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                }
+                            ],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 583137823745638,
+            "layout": {
+                "x": 38,
+                "y": 18,
+                "width": 37,
+                "height": 10
+            },
+            "definition": {
+                "title": "Log Events without Service Tag",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "aggregator": "avg",
+                        "log_query": {
+                            "index": "*",
+                            "search": {
+                                "query": "-service:*"
+                            },
+                            "group_by": [],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ],
+                "precision": 0
+            }
+        },
+        {
+            "id": 356028463230798,
+            "layout": {
+                "x": 38,
+                "y": 29,
+                "width": 37,
+                "height": 10
+            },
+            "definition": {
+                "title": "Log Events without Env Tag",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "aggregator": "avg",
+                        "log_query": {
+                            "index": "*",
+                            "search": {
+                                "query": "-env:*"
+                            },
+                            "group_by": [],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ],
+                "precision": 0
+            }
+        },
+        {
+            "id": 4685917129542901,
+            "layout": {
+                "x": 38,
+                "y": 40,
+                "width": 37,
+                "height": 10
+            },
+            "definition": {
+                "title": "Log Events without Version Tag",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "aggregator": "avg",
+                        "log_query": {
+                            "index": "*",
+                            "search": {
+                                "query": "-version:*"
+                            },
+                            "group_by": [],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ],
+                "precision": 0
+            }
+        },
+        {
+            "id": 3420893391108816,
+            "layout": {
+                "x": 152,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Custom Metric UST Analytics\n",
+                "background_color": "purple",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 1112832440309699,
+            "layout": {
+                "x": 152,
+                "y": 6,
+                "width": 37,
+                "height": 24
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Current State :: March21\n- Currently it is not possible to determine which custom metric has env,service and version attached.\n- There is no Widget to analyze tags\n- There is no widget to just list custom metrics and sort by env, service, version.\n- Its only possible to select a single CM\n- A Single CM has NO Service, NO Version but Env\n-A Sing CM DOES HAVE host based Tags like v1_service and v1_role",
+                "background_color": "vivid_orange",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 6737684069277411,
+            "layout": {
+                "x": 152,
+                "y": 31,
+                "width": 37,
+                "height": 19
+            },
+            "definition": {
+                "title": "Example of CM: env but no service and no version",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "q": "avg:AC.ClientDeleteDocumentsCounter{$Service,$Environment,$Version} by {env, v1_service, v1_role}.as_count()",
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "limit": 50,
+                        "order": "desc"
+                    }
+                ],
+                "has_search_bar": "auto"
+            }
+        },
+        {
+            "id": 6940372241291171,
+            "layout": {
+                "x": 190,
+                "y": 0,
+                "width": 37,
+                "height": 5
+            },
+            "definition": {
+                "type": "note",
+                "content": "# RUM UST Analytics\n",
+                "background_color": "gray",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        },
+        {
+            "id": 5026113243116380,
+            "layout": {
+                "x": 190,
+                "y": 18,
+                "width": 37,
+                "height": 32
+            },
+            "definition": {
+                "title": "Rum Events by Env, Service, version",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "rum_query": {
+                            "index": "*",
+                            "search": {
+                                "query": ""
+                            },
+                            "group_by": [
+                                {
+                                    "facet": "env",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "service",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                },
+                                {
+                                    "facet": "version",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                }
+                            ],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ],
+                "has_search_bar": "auto"
+            }
+        },
+        {
+            "id": 8126917212430242,
+            "layout": {
+                "x": 190,
+                "y": 6,
+                "width": 37,
+                "height": 11
+            },
+            "definition": {
+                "type": "note",
+                "content": "# Current State :: March21\n-ALL Rum Events have Env, Services, Version\n",
+                "background_color": "vivid_green",
+                "font_size": "12",
+                "text_align": "center",
+                "vertical_align": "top",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left",
+                "has_padding": true
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "Host",
+            "default": "*",
+            "prefix": "host"
+        },
+        {
+            "name": "Service",
+            "default": "*",
+            "prefix": "service"
+        },
+        {
+            "name": "Version",
+            "default": "*",
+            "prefix": "version"
+        },
+        {
+            "name": "Environment",
+            "default": "*",
+            "prefix": "env"
+        }
+    ],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": []
+}

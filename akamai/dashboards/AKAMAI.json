@@ -1,0 +1,391 @@
+{
+    "title": "AKAMAI",
+    "description": "",
+    "widgets": [
+        {
+            "id": 8967727923723232,
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 18,
+                "height": 15
+            },
+            "definition": {
+                "type": "image",
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Akamai_logo.svg/1200px-Akamai_logo.svg.png",
+                "sizing": "fit",
+                "margin": "small"
+            }
+        },
+        {
+            "id": 6104732500227058,
+            "layout": {
+                "x": 19,
+                "y": 7,
+                "width": 53,
+                "height": 32
+            },
+            "definition": {
+                "title": "Requests by Status",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "legend_columns": [
+                    "avg",
+                    "min",
+                    "max",
+                    "value",
+                    "sum"
+                ],
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "count:akamai.successful_request{*}.as_count()",
+                        "on_right_yaxis": false,
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "bars"
+                    },
+                    {
+                        "q": "count:akamai.warning_request{*}.as_count()",
+                        "on_right_yaxis": false,
+                        "style": {
+                            "palette": "warm",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "bars"
+                    },
+                    {
+                        "q": "count:akamai.warning_requests{*}.as_count()",
+                        "on_right_yaxis": false,
+                        "style": {
+                            "palette": "orange",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "bars"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                },
+                "markers": []
+            }
+        },
+        {
+            "id": 775958372957892,
+            "layout": {
+                "x": 19,
+                "y": 0,
+                "width": 108,
+                "height": 6
+            },
+            "definition": {
+                "type": "note",
+                "content": "Requests",
+                "background_color": "gray",
+                "font_size": "18",
+                "text_align": "center",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "bottom"
+            }
+        },
+        {
+            "id": 3938525141435918,
+            "layout": {
+                "x": 19,
+                "y": 41,
+                "width": 108,
+                "height": 20
+            },
+            "definition": {
+                "type": "query_table",
+                "requests": [
+                    {
+                        "aggregator": "sum",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "q": "sum:akamai.successful_request{*} by {http.useragent_details.browser.family}.as_count()",
+                        "alias": "Requests",
+                        "limit": 100,
+                        "order": "desc"
+                    },
+                    {
+                        "q": "sum:akamai.failed_request{*} by {http.useragent_details.browser.family}.as_count()",
+                        "alias": "Errors",
+                        "conditional_formats": [
+                            {
+                                "comparator": ">",
+                                "palette": "white_on_red",
+                                "value": 5000
+                            },
+                            {
+                                "comparator": "<",
+                                "palette": "white_on_green",
+                                "value": 5000
+                            }
+                        ],
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "aggregator": "sum"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8676073864190714,
+            "layout": {
+                "x": 0,
+                "y": 41,
+                "width": 17,
+                "height": 16
+            },
+            "definition": {
+                "type": "note",
+                "content": "Requests per Browser",
+                "background_color": "yellow",
+                "font_size": "14",
+                "text_align": "left",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            }
+        },
+        {
+            "id": 5683916956741164,
+            "layout": {
+                "x": 0,
+                "y": 60,
+                "width": 17,
+                "height": 16
+            },
+            "definition": {
+                "type": "note",
+                "content": "Errors per Device",
+                "background_color": "yellow",
+                "font_size": "14",
+                "text_align": "left",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            }
+        },
+        {
+            "id": 3582399210475356,
+            "layout": {
+                "x": 0,
+                "y": 79,
+                "width": 17,
+                "height": 16
+            },
+            "definition": {
+                "type": "note",
+                "content": "Request per endpoint",
+                "background_color": "yellow",
+                "font_size": "14",
+                "text_align": "left",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            }
+        },
+        {
+            "id": 6752786167201144,
+            "layout": {
+                "x": 0,
+                "y": 16,
+                "width": 18,
+                "height": 16
+            },
+            "definition": {
+                "title": "Requests OK",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(sum:akamai.successful_request{*}.as_count().fill(zero)/sum:akamai.total_request{*}.as_count().fill(zero))*100",
+                        "aggregator": "sum",
+                        "conditional_formats": [
+                            {
+                                "comparator": ">",
+                                "palette": "white_on_green",
+                                "value": 90
+                            },
+                            {
+                                "comparator": ">=",
+                                "palette": "white_on_yellow",
+                                "value": 80
+                            },
+                            {
+                                "comparator": "<",
+                                "palette": "white_on_red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 687977217941506,
+            "layout": {
+                "x": 19,
+                "y": 60,
+                "width": 108,
+                "height": 20
+            },
+            "definition": {
+                "type": "query_table",
+                "requests": [
+                    {
+                        "aggregator": "sum",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "q": "sum:akamai.successful_request{*} by {http.useragent_details.device.model}.as_count()",
+                        "alias": "Requests",
+                        "limit": 100,
+                        "order": "desc"
+                    },
+                    {
+                        "q": "sum:akamai.failed_request{*} by {http.useragent_details.device.model}.as_count()",
+                        "alias": "Errors",
+                        "conditional_formats": [
+                            {
+                                "comparator": ">",
+                                "palette": "white_on_red",
+                                "value": 5000
+                            },
+                            {
+                                "comparator": "<",
+                                "palette": "white_on_green",
+                                "value": 5000
+                            }
+                        ],
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "aggregator": "sum"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 1367516479685200,
+            "layout": {
+                "x": 19,
+                "y": 79,
+                "width": 108,
+                "height": 20
+            },
+            "definition": {
+                "type": "query_table",
+                "requests": [
+                    {
+                        "aggregator": "sum",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "q": "sum:akamai.successful_request{*} by {http.url_details.host}.as_count()",
+                        "alias": "Requests",
+                        "limit": 100,
+                        "order": "desc"
+                    },
+                    {
+                        "q": "sum:akamai.failed_request{*} by {http.url_details.host}.as_count()",
+                        "alias": "Errors",
+                        "conditional_formats": [
+                            {
+                                "comparator": ">",
+                                "palette": "white_on_red",
+                                "value": 5000
+                            },
+                            {
+                                "comparator": "<",
+                                "palette": "white_on_green",
+                                "value": 5000
+                            }
+                        ],
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "aggregator": "sum"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2806540107379796,
+            "layout": {
+                "x": 74,
+                "y": 7,
+                "width": 52,
+                "height": 30
+            },
+            "definition": {
+                "title": "Request per country",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                    "live_span": "15m"
+                },
+                "type": "geomap",
+                "requests": [
+                    {
+                        "log_query": {
+                            "index": "*",
+                            "search": {
+                                "query": "service:Akamai"
+                            },
+                            "group_by": [
+                                {
+                                    "facet": "@network.client.geoip.country.iso_code",
+                                    "sort": {
+                                        "order": "desc",
+                                        "aggregation": "count"
+                                    },
+                                    "limit": 10
+                                }
+                            ],
+                            "compute": {
+                                "aggregation": "count"
+                            }
+                        }
+                    }
+                ],
+                "style": {
+                    "palette": "hostmap_blues",
+                    "palette_flip": false
+                },
+                "view": {
+                    "focus": "WORLD"
+                }
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "http",
+            "default": "*"
+        }
+    ],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": []
+}

@@ -1,0 +1,411 @@
+{
+    "title": "Kubernetes Optimization",
+    "description": "",
+    "widgets": [
+        {
+            "id": 5562978440565760,
+            "layout": {
+                "x": 0,
+                "y": 33,
+                "width": 57,
+                "height": 47
+            },
+            "definition": {
+                "title": "Pod CPU usage",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "q": "avg:kubernetes.cpu.limits{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "alias": "CPU Limit",
+                        "limit": 50,
+                        "order": "desc"
+                    },
+                    {
+                        "q": "avg:kubernetes.cpu.user.total{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "alias": "CPU used"
+                    },
+                    {
+                        "q": "avg:kubernetes.cpu.limits{$pod,$cluster,$node,$namespace} by {pod_name}-avg:kubernetes.cpu.user.total{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "order": "desc",
+                        "alias": "CPU Not Used"
+                    }
+                ],
+                "has_search_bar": "auto"
+            }
+        },
+        {
+            "id": 4168108535223426,
+            "layout": {
+                "x": 0,
+                "y": 81,
+                "width": 57,
+                "height": 47
+            },
+            "definition": {
+                "title": "Pod Max CPU used VS CPU Limit",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "scatterplot",
+                "requests": {
+                    "x": {
+                        "q": "avg:kubernetes.cpu.limits{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg"
+                    },
+                    "y": {
+                        "q": "max:kubernetes.cpu.user.total{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg"
+                    }
+                },
+                "xaxis": {
+                    "label": "CPU limit"
+                },
+                "yaxis": {
+                    "label": "CPU used"
+                },
+                "color_by_groups": []
+            }
+        },
+        {
+            "id": 6213282076146200,
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 28,
+                "height": 15
+            },
+            "definition": {
+                "title": "Max CPU Request",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(max:kubernetes.cpu.requests{$node,$cluster,$pod,$namespace}/max:kubernetes.cpu.capacity{$node,$cluster,$pod,$namespace})*100",
+                        "aggregator": "avg"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 3613242814877882,
+            "layout": {
+                "x": 29,
+                "y": 0,
+                "width": 28,
+                "height": 15
+            },
+            "definition": {
+                "title": "Max CPU Limits",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(max:kubernetes.cpu.limits{$node,$cluster,$pod,$namespace}/max:kubernetes.cpu.capacity{$node,$cluster,$pod,$namespace})*100",
+                        "aggregator": "avg"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 788649585213518,
+            "layout": {
+                "x": 0,
+                "y": 16,
+                "width": 57,
+                "height": 15
+            },
+            "definition": {
+                "title": "CPU Ressources",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": false,
+                "legend_size": "0",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "avg:kubernetes.cpu.requests{$node,$cluster,$pod,$namespace}, avg:kubernetes.cpu.limits{$node,$cluster,$pod,$namespace}, avg:kubernetes.cpu.capacity{$node,$cluster,$pod,$namespace}",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "line"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                }
+            }
+        },
+        {
+            "id": 1382320629298462,
+            "layout": {
+                "x": 59,
+                "y": 0,
+                "width": 28,
+                "height": 15
+            },
+            "definition": {
+                "title": "Max Memory Request",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(max:kubernetes.memory.requests{$node,$cluster,$pod,$namespace}/max:kubernetes.memory.capacity{$node,$cluster,$pod,$namespace})*100",
+                        "aggregator": "avg"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 8377159752249294,
+            "layout": {
+                "x": 88,
+                "y": 0,
+                "width": 28,
+                "height": 15
+            },
+            "definition": {
+                "title": "Max Memory Limits",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(max:kubernetes.memory.limits{$node,$cluster,$pod,$namespace}/max:kubernetes.memory.capacity{$node,$cluster,$pod,$namespace})*100",
+                        "aggregator": "avg"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 6140787738541572,
+            "layout": {
+                "x": 59,
+                "y": 16,
+                "width": 57,
+                "height": 15
+            },
+            "definition": {
+                "title": "Memory Ressources",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": false,
+                "legend_size": "0",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "avg:kubernetes.memory.requests{$node,$cluster,$pod,$namespace}, avg:kubernetes.memory.limits{$node,$cluster,$pod,$namespace}, avg:kubernetes.memory.capacity{$node,$cluster,$pod,$namespace}",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "line"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                }
+            }
+        },
+        {
+            "id": 569739664117082,
+            "layout": {
+                "x": 118,
+                "y": 0,
+                "width": 28,
+                "height": 15
+            },
+            "definition": {
+                "title": "Max Pods Alloc",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "(max:kubernetes.pods.running{$node,$cluster,$pod,$namespace}/max:kubernetes_state.node.pods_capacity{$node,$cluster,$pod,$namespace})*100",
+                        "aggregator": "avg"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "%",
+                "precision": 2
+            }
+        },
+        {
+            "id": 2347543228006482,
+            "layout": {
+                "x": 118,
+                "y": 16,
+                "width": 57,
+                "height": 15
+            },
+            "definition": {
+                "title": "Pods",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": false,
+                "legend_size": "0",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "avg:kubernetes_state.pod.status_phase{$node,$cluster,$pod,$namespace} by {phase}",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "line"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                }
+            }
+        },
+        {
+            "id": 4318293268998832,
+            "layout": {
+                "x": 59,
+                "y": 33,
+                "width": 57,
+                "height": 47
+            },
+            "definition": {
+                "title": "Pod Memory usage",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "query_table",
+                "requests": [
+                    {
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "q": "avg:kubernetes.memory.limits{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "alias": "Memory Limit",
+                        "limit": 50,
+                        "order": "desc"
+                    },
+                    {
+                        "q": "avg:kubernetes.memory.usage{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "alias": "Memory used"
+                    },
+                    {
+                        "q": "avg:kubernetes.memory.limits{$pod,$cluster,$node,$namespace} by {pod_name}-avg:kubernetes.memory.usage{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg",
+                        "cell_display_mode": [
+                            "bar"
+                        ],
+                        "order": "desc",
+                        "alias": "Memory Not Used"
+                    }
+                ],
+                "has_search_bar": "auto"
+            }
+        },
+        {
+            "id": 3505796092454196,
+            "layout": {
+                "x": 59,
+                "y": 81,
+                "width": 57,
+                "height": 47
+            },
+            "definition": {
+                "title": "Pod Max Memory used VS Memory Limit",
+                "title_size": "16",
+                "title_align": "left",
+                "type": "scatterplot",
+                "requests": {
+                    "x": {
+                        "q": "avg:kubernetes.memory.limits{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg"
+                    },
+                    "y": {
+                        "q": "max:kubernetes.memory.usage{$pod,$cluster,$node,$namespace} by {pod_name}",
+                        "aggregator": "avg"
+                    }
+                },
+                "xaxis": {
+                    "label": "Memory limit"
+                },
+                "yaxis": {
+                    "label": "Memory used"
+                },
+                "color_by_groups": []
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "pod",
+            "default": "*",
+            "prefix": "pod_name"
+        },
+        {
+            "name": "cluster",
+            "default": "*",
+            "prefix": "cluster_name"
+        },
+        {
+            "name": "node",
+            "default": "*",
+            "prefix": "host"
+        },
+        {
+            "name": "namespace",
+            "default": "*",
+            "prefix": "namespace"
+        }
+    ],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": [],
+    "id": "53t-gfk-rz6"
+}
