@@ -3,204 +3,33 @@
 --- 
 
 @import "{{ site.theme }}";
+@import "aside";
+@import "integration";
+@import "tabs";
+@import "search-box";
 @import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
 
-html {height: 100%;}
+html {
+  height: 100%;
+}
 
 .page-header {
-    background-image: url(https://imgix.datadoghq.com/img/dd_press_banner.png?ch=Width&fit=max&auto=compress,format);
-    display: table-caption;
+  background-image: url(https://imgix.datadoghq.com/img/dd_press_banner.png?ch=Width&fit=max&auto=compress,format);
+  display: table-caption;
 }
 
 body {
-    display: table;
-    width: 100%;
+  display: table;
+  width: 100%;
 }
-
-
-aside {
-    display: table-cell;
-    width: 25%;
-    height: 100%;
-    background: #312450;
-}
-
-aside ul {
-    list-style: none;
-    
-    li {
-      position: relative;
-      margin: 3.2em 0;
-      
-      a {
-        line-height: 5em;
-        text-transform: uppercase;
-        text-decoration: none;
-        letter-spacing: 0.4em;
-        color: white;
-        display: block;
-        transition: all ease-out 300ms;
-      }
-      
-      
-      &:hover a {
-        color: rgba(#FFF, 0.75);
-      }
-      
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 0.2em;
-        background: black;
-        left: 0;
-        bottom: 0;
-        background-image: linear-gradient(to right, #5e42a6, #b74e91)
-      }
-    }
-  }
 
 .main-content {
-    display: table-cell;
-    width: 75%;
-    margin-left: 25%;
-    height: 100%;
+  display: table-cell;
+  width: 75%;
+  margin-left: 25%;
+  height: 100%;
 }
 
 footer {
-    text-align: center;
-}
-
-/**
-
-Integration Page
-
-**/
-
-.integration-title {
-  margin-bottom: 10%;
-  h1 {
-    text-align: center;
-    color: #561f91;
-    text-transform: uppercase;
-    letter-spacing: 0.4em;
-  }
-
-  .line {
-    content: '';
-    position: relative;
-    width: 100%;
-    height: 0.2em;
-    background: black;
-    left: 0;
-    bottom: 0;
-    background-image: linear-gradient(to right, #5e42a6, #b74e91)
-  }
-}
-
-figure {
   text-align: center;
-}
-
-.dash {
-  width: 33%;
-  display: inline-table;
-  position: relative;
-  
-  img {
-    opacity: 1;
-    transition: .5s ease;
-    backface-visibility: hidden;
-  }
-
-  .middle {
-    transition: .5s ease;
-    opacity: 0;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-  }
-
-  &:hover img {
-    opacity: 0.3;
-  }
-  
-  &:hover .middle {
-    opacity: 1;
-  }
-
-}
-
-/**
-Tabs
-**/
-
-section {
-  display: none;
-  padding: 20px 0 0;
-  border-top: 1px solid #ddd;
-}
-
-input {
-  display: none;
-}
-
-label {
-  display: inline-block;
-  margin: 0 0 -1px;
-  padding: 15px 25px;
-  font-weight: 600;
-  text-align: center;
-  color: #bbb;
-  border: 1px solid transparent;
-}
-
-label:before {
-  font-family: fontawesome;
-  font-weight: normal;
-  margin-right: 10px;
-}
-
-label[for*='1']:before {
-  content: '\f080';
-}
-
-label[for*='2']:before {
-  content: '\f0f3';
-}
-
-label:hover {
-  color: #888;
-  cursor: pointer;
-}
-
-input:checked + label {
-  color: #555;
-  border: 1px solid #ddd;
-  border-top: 2px solid orange;
-  border-bottom: 1px solid #fff;
-}
-
-#tab1:checked ~ #content1,
-#tab2:checked ~ #content2 {
-  display: block;
-}
-
-@media screen and (max-width: 650px) {
-  label {
-    font-size: 0;
-  }
-
-  label:before {
-    margin: 0;
-    font-size: 18px;
-  }
-}
-@media screen and (max-width: 400px) {
-  label {
-    padding: 15px;
-  }
 }

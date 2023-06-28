@@ -1,0 +1,41 @@
+aside {
+  display: table-cell;
+  width: 25%;
+  height: 100%;
+  background: #312450;
+}
+
+aside ul {
+  list-style: none;
+
+  li {
+    position: relative;
+    margin: 0.2em 0;
+
+    a {
+      line-height: 5em;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      color: white;
+      display: block;
+      transition: all ease-out 300ms;
+    }
+
+
+    &:hover a {
+      color: rgba(#FFF, 0.75);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0.2em;
+      background: black;
+      left: 0;
+      bottom: 0;
+      background-image: linear-gradient(to right, #5e42a6, #b74e91)
+    }
+  }
+}
