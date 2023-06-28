@@ -1,0 +1,57 @@
+.integration-title {
+  margin-bottom: 10%;
+
+  h1 {
+    text-align: center;
+    color: #561f91;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+  }
+
+  .line {
+    content: '';
+    position: relative;
+    width: 100%;
+    height: 0.2em;
+    background: black;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, #5e42a6, #b74e91)
+  }
+}
+
+figure {
+  text-align: center;
+}
+
+.dash {
+  width: 33%;
+  display: inline-table;
+  position: relative;
+
+  img {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &:hover img {
+    opacity: 0.3;
+  }
+
+  &:hover .middle {
+    opacity: 1;
+  }
+
+}

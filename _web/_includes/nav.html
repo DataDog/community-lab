@@ -1,14 +1,45 @@
-<nav class="nav">
+<div class="navigation">
+    <div class="search-bar">
+        <div class="search-box">
+            <form name="search">
+                <input type="text" id="navSearch" onkeyup="filterIntegrations()" class="input" name="txt"
+                    onmouseout="this.value = ''; this.blur();">
+            </form>
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ site.baseurl }}/">home</a>
-        </li>
+    <nav id="navList" class="nav">
 
-        {% for doc in site.pages %}
+        <ul>
+            <li>
+                <a href="{{ site.baseurl }}/">home</a>
+            </li>
+
+            {% for doc in site.pages %}
             {% if doc.category == "integration" %}
-                <li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
+            <li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
             {% endif %}
-        {% endfor %}
-    </ul>
-</nav>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <script>
+        function filterIntegrations() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById("navSearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("navList");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</div>
