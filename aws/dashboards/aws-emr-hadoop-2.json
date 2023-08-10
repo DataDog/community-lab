@@ -1,1 +1,0 @@
-{"description":"Visualize AWS  EMR Hadoop 2 metrics","is_read_only":false,"layout_type":"ordered","template_variables":[{"name":"region","prefix":"region"},{"name":"jobflowid","prefix":"jobflowid"}],"title":"AWS EMR Hadoop 2","widgets":null}

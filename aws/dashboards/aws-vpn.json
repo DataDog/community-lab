@@ -1,1 +1,0 @@
-{"description":"Visualize AWS VPN metrics","is_read_only":false,"layout_type":"ordered","template_variables":[{"name":"region","prefix":"region"},{"name":"vpnid","prefix":"vpnid"}],"title":"AWS VPN","widgets":null}
