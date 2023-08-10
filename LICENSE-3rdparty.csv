@@ -1,5 +1,5 @@
 Component,Origin,License,Copyright
-go.sum,github.com/DataDog/datadog-api-client-go/v2,"Apache-2.0,2019-Present Datadog, Inc."
+go.sum,github.com/DataDog/datadog-api-client-go/v2,Apache-2.0,"2019-Present Datadog, Inc."
 go.sum,github.com/DataDog/zstd,BSD-3-Clause,"2016, Datadog <info@datadoghq.com>"
 go.sum,golang.org/x/exp,BSD-3-Clause,"2009 The Go Authors"
 go.sum,golang.org/x/oauth2,BSD-3-Clause,"2009 The Go Authors"
