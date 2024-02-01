@@ -1,12 +1,12 @@
 Welcome to Datadog Community Lab.
 
-This is a place where you can share and find community Dashboards, Monitors, and more, for Datadog.
+This is a place where you can share and find community-contributed Dashboards, Monitors, and more for Datadog.
 
 # Usage
 
-To use one of the ressources, head to the github page, download the `json` file and upload it to your Datadog environment.
+To use one of the resources, head to the github page, download the `json` file and upload it to your Datadog environment.
 
-To upload it, you can use the [Terraform Provider](https://registry.terraform.io/providers/DataDog/datadog/latest/docs), the [API](https://docs.datadoghq.com/api/latest/), or direcly in the UI.
+To upload it, you can use the [Terraform Provider](https://registry.terraform.io/providers/DataDog/datadog/latest/docs), the [API](https://docs.datadoghq.com/api/latest/), or the Datadog UI.
 
 # Contribution
 
